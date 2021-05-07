@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MvcClient
 {
@@ -33,7 +34,12 @@ namespace MvcClient
                 .AddCookie("Cookies")
                 .AddOpenIdConnect("oidc", options =>
                 {
+                    options.ClaimActions.MapUniqueJsonKey("position", "position");
+                    options.ClaimActions.MapUniqueJsonKey("club", "club");
+                    options.ClaimActions.MapUniqueJsonKey("country", "country");
+
                     options.Scope.Add("profile");
+                    options.Scope.Add("rugby");
                     options.GetClaimsFromUserInfoEndpoint = true;
 
                     options.Authority = "https://localhost:5001";

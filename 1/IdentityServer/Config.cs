@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer.MyExtensions;
 using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
@@ -11,11 +12,23 @@ namespace IdentityServer
     public static class Config
     {
 
+        public static IdentityResource MyRugbyIdentityResource()
+        {
+            var claims = new List<string>()
+            {
+                "position",
+                "club",
+                "clountry"
+            };
+            return new IdentityResource("rugby", claims);
+        }
+
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                SPIdentityResources.Rugby(),
             };
 
 
@@ -50,7 +63,8 @@ namespace IdentityServer
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "rugby",
                     }
                 },
                 new Client
