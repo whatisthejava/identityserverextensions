@@ -40,6 +40,8 @@ namespace MvcClient
 
                 options.Scope.Add("profile");
                 options.Scope.Add("rugby");
+                options.Scope.Add("api1");
+                options.Scope.Add("offline_access");
                 options.GetClaimsFromUserInfoEndpoint = true;
 
                 options.Authority = "https://localhost:5001";

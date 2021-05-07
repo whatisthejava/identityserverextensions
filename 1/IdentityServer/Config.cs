@@ -56,6 +56,7 @@ namespace IdentityServer
                     },
 
                      RedirectUris = { "https://localhost:5002/signin-oidc" },
+                     AllowOfflineAccess = true,
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
@@ -65,6 +66,7 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "rugby",
+                        "api1"
                     }
                 },
                 new Client
