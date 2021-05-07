@@ -31,23 +31,23 @@ namespace MvcClient
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
             })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    options.ClaimActions.MapUniqueJsonKey("position", "position");
-                    options.ClaimActions.MapUniqueJsonKey("club", "club");
-                    options.ClaimActions.MapUniqueJsonKey("country", "country");
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.ClaimActions.MapUniqueJsonKey("position", "position");
+                options.ClaimActions.MapUniqueJsonKey("club", "club");
+                options.ClaimActions.MapUniqueJsonKey("country", "country");
 
-                    options.Scope.Add("profile");
-                    options.Scope.Add("rugby");
-                    options.GetClaimsFromUserInfoEndpoint = true;
+                options.Scope.Add("profile");
+                options.Scope.Add("rugby");
+                options.GetClaimsFromUserInfoEndpoint = true;
 
-                    options.Authority = "https://localhost:5001";
-                    options.ClientId = "mvc";
-                    options.ClientSecret = "secret";
-                    options.ResponseType = "code";
-                    options.SaveTokens = true;
-                });
+                options.Authority = "https://localhost:5001";
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+                options.SaveTokens = true;
+            });
 
 
         }
