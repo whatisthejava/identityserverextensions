@@ -18,12 +18,14 @@ namespace Api.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status403Forbidden)]
 
-        public List<KeyValuePair<string, string>> GetExtraClaims()
+        public IActionResult GetExtraClaims()
         {
-            var list = new List<KeyValuePair<string, string>>();
-            list.Add(new KeyValuePair<string, string>("employer", "SL"));
-            list.Add(new KeyValuePair<string, string>("jobtitle", "Technical Architect"));
-            return list;
+            var list2 = new List<dynamic>
+            {
+                new { Type = "employer", Value = "SL" },
+                new { Type = "jobtitle", Value= "Technical Architect" }
+            };
+            return new JsonResult(from c in list2 select new { c.Type, c.Value } );
         }
     }
 }

@@ -10,9 +10,10 @@ namespace Client
     {
         private static async Task Main()
         {
+       
+
             // discover endpoints from metadata
             var client = new HttpClient();
-
             var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
             if (disco.IsError)
             {
@@ -21,15 +22,37 @@ namespace Client
                 return;
             }
 
-            // request token
-            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-            {
-                Address = disco.TokenEndpoint,
-                ClientId = "client",
-                ClientSecret = "secret",
 
-                Scope = "api1"
-            });
+            Console.WriteLine("Please pick which Client to connect as ");
+            var input = Console.ReadLine();
+            int i = 1;
+            Int32.TryParse(input, out i);
+            ClientCredentialsTokenRequest request = null;
+
+            if (i == 2)
+            {
+                request = new ClientCredentialsTokenRequest
+                {
+                    Address = disco.TokenEndpoint,
+                    ClientId = "client2",
+                    ClientSecret = "secret",
+
+                    Scope = "employment"
+                };
+            }
+            else
+            {
+                request = new ClientCredentialsTokenRequest
+                {
+                    Address = disco.TokenEndpoint,
+                    ClientId = "client",
+                    ClientSecret = "secret",
+
+                    Scope = "api1"
+                };
+            }
+            // request token
+            var tokenResponse = await client.RequestClientCredentialsTokenAsync(request);
 
             if (tokenResponse.IsError)
             {

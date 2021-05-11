@@ -86,6 +86,22 @@ namespace IdentityServerAspNetIdentity
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
                 },
+                 new Client
+                {
+                    ClientId = "client2",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    // scopes that client has access to
+                    AllowedScopes = { "employment" }
+                },
                 new Client
                 {
                     ClientId = "js",
