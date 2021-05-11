@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Collections.Generic;
 
 namespace API2
 {
@@ -55,6 +56,16 @@ namespace API2
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                            },
+                            new List<string>()
+                        }
+                    });
             });
 
             services.AddCors(options =>

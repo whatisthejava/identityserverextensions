@@ -64,6 +64,16 @@ namespace Api
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                            },
+                            new List<string>()
+                        }
+                    });
             });
 
             services.AddCors(options =>

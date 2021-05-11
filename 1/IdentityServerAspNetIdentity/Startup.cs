@@ -5,6 +5,7 @@
 using IdentityServer4;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
+using IdentityServerAspNetIdentity.MyExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -47,6 +48,7 @@ namespace IdentityServerAspNetIdentity
                 // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 options.EmitStaticAudienceClaim = true;
             })
+                .AddExtensionGrantValidator<DelegationGrantValidator>()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)

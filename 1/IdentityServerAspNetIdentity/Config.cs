@@ -45,12 +45,23 @@ namespace IdentityServerAspNetIdentity
             {
                 new Client
                 {
+                    ClientId = "api1.client",
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    AllowedGrantTypes = { "delegation" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        "employment"
+                    }
+                },
+                new Client
+                {
                     ClientId = "mvc",
-
-                    // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.Code,
-
-                    // secret for authentication
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
@@ -58,12 +69,9 @@ namespace IdentityServerAspNetIdentity
 
                      RedirectUris = { "https://localhost:5002/signin-oidc" },
                      AllowOfflineAccess = true,
-
-                    // where to redirect to after logout
-                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
-
-                    AllowedScopes = new List<string>
-                    {
+                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+                     AllowedScopes = new List<string>
+                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "rugby",
@@ -73,33 +81,21 @@ namespace IdentityServerAspNetIdentity
                 new Client
                 {
                     ClientId = "client",
-
-                    // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    // secret for authentication
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
-
-                    // scopes that client has access to
                     AllowedScopes = { "api1" }
                 },
                  new Client
                 {
                     ClientId = "client2",
-
-                    // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    // secret for authentication
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
-
-                    // scopes that client has access to
                     AllowedScopes = { "employment" }
                 },
                 new Client
