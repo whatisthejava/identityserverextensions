@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
+using MvcClient.Managers;
 
 namespace MvcClient
 {
@@ -22,9 +23,16 @@ namespace MvcClient
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
+        private void AddOwnDIClasses(IServiceCollection services)
+        {
+            services.AddTransient<ICallExternalApiManager, CallExternalApiManager>();
+            services.AddTransient<IExternalGrantManager, ExternalGrantManager>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            AddOwnDIClasses(services);
             services.AddControllersWithViews();
             services.AddAuthentication(options =>
             {

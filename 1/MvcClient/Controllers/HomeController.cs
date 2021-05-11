@@ -9,6 +9,7 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MvcClient.Managers;
 using MvcClient.Models;
 using Newtonsoft.Json.Linq;
 
@@ -17,10 +18,14 @@ namespace MvcClient.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICallExternalApiManager _manager;
+        private readonly IExternalGrantManager _grants;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICallExternalApiManager manager, IExternalGrantManager grants)
         {
             _logger = logger;
+            _manager = manager;
+            _grants = grants;
         }
 
         public IActionResult Index()
@@ -41,46 +46,16 @@ namespace MvcClient.Controllers
         public async Task<IActionResult> CallApi()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync("https://localhost:6001/identity");
-
+            var content = await _manager.CallApi(accessToken, "https://localhost:6001/identity");
             ViewBag.Json = JArray.Parse(content).ToString();
             return View("json");
         }
 
         public async Task<IActionResult> ExtensionGrant()
         {
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-
-            var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
-
-            var response = await client.RequestTokenAsync(new TokenRequest
-            {
-                Address = disco.TokenEndpoint,
-                GrantType = "delegation",
-
-                ClientId = "api1.client",
-                ClientSecret = "secret",
-
-                Parameters =
-                {
-                    { "scope", "employment" },
-                    { "token", accessToken}
-                }
-            });
-            var newToken = response.Json;
-
-
-            client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", newToken.GetProperty("access_token").ToString());
-            var content = await client.GetStringAsync("https://localhost:6002/identity");
-
+            var accessToken = await _grants.ExecuteDelegation(HttpContext);
+            var content = await _manager.CallApi(accessToken, "https://localhost:6002/identity");
             ViewBag.Json = JArray.Parse(content).ToString();
-            return View("json");
-            ViewBag.Json = response.Json;
             return View("json");
         }
 
