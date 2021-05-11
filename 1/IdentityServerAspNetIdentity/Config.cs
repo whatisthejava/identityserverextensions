@@ -36,7 +36,8 @@ namespace IdentityServerAspNetIdentity
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
-                new ApiScope("api1", "My API")
+                new ApiScope("api1", "My API"),
+                new ApiScope("employment", "Employment scope for API2")
             };
 
         public static IEnumerable<Client> Clients =>
