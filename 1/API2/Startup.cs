@@ -30,7 +30,7 @@ namespace API2
                 options.AddPolicy("ApiScope", policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("scope", "api2");
+                    policy.RequireClaim("scope", "api1");
                 });
             });
 
