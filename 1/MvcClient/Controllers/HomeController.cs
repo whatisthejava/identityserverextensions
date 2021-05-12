@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MvcClient.Managers;
 using MvcClient.Models;
 using Newtonsoft.Json.Linq;
@@ -20,12 +23,14 @@ namespace MvcClient.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ICallExternalApiManager _manager;
         private readonly IExternalGrantManager _grants;
+        private readonly IRefreshTokenManager _refresh;
 
-        public HomeController(ILogger<HomeController> logger, ICallExternalApiManager manager, IExternalGrantManager grants)
+        public HomeController(ILogger<HomeController> logger, ICallExternalApiManager manager, IExternalGrantManager grants, IRefreshTokenManager refresh)
         {
             _logger = logger;
             _manager = manager;
             _grants = grants;
+            _refresh = refresh;
         }
 
         public IActionResult Index()
@@ -59,6 +64,34 @@ namespace MvcClient.Controllers
             return View("json");
         }
 
+        [Route("refresh")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var oldAccessToken = await HttpContext.GetTokenAsync("access_token");
+            var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
+            var newAccessToken = await _refresh.RefreshToken(refreshToken);
+
+
+            string json = @"[{ old: '" + oldAccessToken +"',new: '"+ newAccessToken.IdentityToken +"'}]";
+            ViewBag.Json = JArray.Parse(json).ToString();
+            return View("json");
+        }
+
+        [Route("refresh/{token}")]
+        public async Task<IActionResult> CreateNewSessionFromRefreshToken(string token)
+        {
+            var tokenResult = await _refresh.RefreshToken(token);
+
+            var authInfo = await HttpContext.AuthenticateAsync("Cookies");            
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
+
+            await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
+
+            string json = @"[{ new: '" + tokenResult.IdentityToken + "'}]";
+            ViewBag.Json = JArray.Parse(json).ToString();
+            return View("json");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

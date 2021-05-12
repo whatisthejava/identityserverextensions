@@ -28,6 +28,7 @@ namespace MvcClient
         {
             services.AddTransient<ICallExternalApiManager, CallExternalApiManager>();
             services.AddTransient<IExternalGrantManager, ExternalGrantManager>();
+            services.AddTransient<IRefreshTokenManager, RefreshTokenManager>();
         }
 
         public void ConfigureServices(IServiceCollection services)
