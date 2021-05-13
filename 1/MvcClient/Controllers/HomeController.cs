@@ -74,24 +74,22 @@ namespace MvcClient.Controllers
 
             string json = @"[{ old: '" + oldAccessToken +"',new: '"+ newAccessToken.IdentityToken +"'}]";
             ViewBag.Json = JArray.Parse(json).ToString();
-            return View("json");
+            return RedirectToAction("Index");
         }
 
-        [Route("refresh/{token}")]
-        public async Task<IActionResult> CreateNewSessionFromRefreshToken(string token)
+        [Route("fetch-extra-claims")]
+        public async Task<IActionResult> FetchExtraCalims()
         {
-            var tokenResult = await _refresh.RefreshToken(token);
+            var oldAccessToken = await HttpContext.GetTokenAsync("access_token");
+            var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
+            var newAccessToken = await _refresh.RefreshToken(refreshToken);
 
-            var authInfo = await HttpContext.AuthenticateAsync("Cookies");            
-            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
-            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
 
-            await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
-
-            string json = @"[{ new: '" + tokenResult.IdentityToken + "'}]";
+            string json = @"[{ old: '" + oldAccessToken + "',new: '" + newAccessToken.IdentityToken + "'}]";
             ViewBag.Json = JArray.Parse(json).ToString();
-            return View("json");
+            return RedirectToAction("Index");
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -11,24 +11,13 @@ namespace IdentityServerAspNetIdentity
 {
     public static class Config
     {
-
-        public static IdentityResource MyRugbyIdentityResource()
-        {
-            var claims = new List<string>()
-            {
-                "position",
-                "club",
-                "clountry"
-            };
-            return new IdentityResource("rugby", claims);
-        }
-
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 SPIdentityResources.Rugby(),
+                SPIdentityResources.Bmi(),
             };
 
 
@@ -76,6 +65,7 @@ namespace IdentityServerAspNetIdentity
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "rugby",
+                        "bmi",
                         "api1"
                     }
                 },

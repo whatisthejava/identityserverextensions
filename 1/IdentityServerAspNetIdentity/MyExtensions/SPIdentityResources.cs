@@ -18,5 +18,15 @@ namespace IdentityServer.MyExtensions
             };
             return new IdentityResource("rugby", claims);
         }
+
+        public static IdentityResource Bmi()
+        {
+            var claims = new List<string>()
+            {
+                "height",
+                "weight",
+            };
+            return new IdentityResource("bmi", claims);
+        }
     }
 }
