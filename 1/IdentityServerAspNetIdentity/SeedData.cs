@@ -39,7 +39,7 @@ namespace IdentityServerAspNetIdentity
 
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                    bool recreateUsers = false;
+                    bool recreateUsers = true;
 
                     ManageAlice(userMgr, recreateUsers);
                     ManageBob(userMgr, recreateUsers);
@@ -52,7 +52,7 @@ namespace IdentityServerAspNetIdentity
         {
             var carson = userMgr.FindByNameAsync("carson").Result;
 
-            if (delete)
+            if (delete && carson != null)
             {
                 _ = userMgr.DeleteAsync(carson).Result;
                 carson = null;
@@ -73,7 +73,7 @@ namespace IdentityServerAspNetIdentity
         {
             var bob = userMgr.FindByNameAsync("bob").Result;
 
-            if (delete)
+            if (delete && bob != null)
             {
                 _ = userMgr.DeleteAsync(bob).Result;
                 bob = null;
@@ -93,7 +93,7 @@ namespace IdentityServerAspNetIdentity
         {
             var alice = userMgr.FindByNameAsync("alice").Result;
 
-            if (delete)
+            if (delete && alice != null)
             {
                 _ = userMgr.DeleteAsync(alice).Result;
                 alice = null;
@@ -117,7 +117,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "AliceSmith@email.com",
                 EmailConfirmed = true,
             };
-            var result = userMgr.CreateAsync(alice, "Sitekit123").Result;
+            var result = userMgr.CreateAsync(alice, "Sitekit123$").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
@@ -147,7 +147,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "BobSmith@email.com",
                 EmailConfirmed = true
             };
-            var result = userMgr.CreateAsync(bob, "Sitekit123").Result;
+            var result = userMgr.CreateAsync(bob, "Sitekit123$").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
@@ -177,7 +177,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "Carson@email.com",
                 EmailConfirmed = true
             };
-            var result = userMgr.CreateAsync(carson, "Sitekit123").Result;
+            var result = userMgr.CreateAsync(carson, "Sitekit123$").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
