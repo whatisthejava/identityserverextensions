@@ -60,6 +60,7 @@ namespace IdentityServerAspNetIdentity
                      AllowOfflineAccess = true,
                      PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
                      AlwaysIncludeUserClaimsInIdToken = true,
+                     UpdateAccessTokenClaimsOnRefresh = true,
                      AllowedScopes = new List<string>
                      {
                         IdentityServerConstants.StandardScopes.OpenId,

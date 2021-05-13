@@ -131,9 +131,13 @@ namespace IdentityServerAspNetIdentity
                             new Claim(JwtClaimTypes.GivenName, "Alice"),
                             new Claim(JwtClaimTypes.FamilyName, "Smith"),
                             new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+
                             new Claim("position", "lock"),
                             new Claim("club", "Exeter"),
-                            new Claim("country", "Scotland")
+                            new Claim("country", "Scotland"),
+
+                            new Claim("height", "5ft2"),
+                            new Claim("weight", "9st")
                         }).Result;
             if (!result.Succeeded)
             {
@@ -161,9 +165,14 @@ namespace IdentityServerAspNetIdentity
                             new Claim(JwtClaimTypes.GivenName, "Bob"),
                             new Claim(JwtClaimTypes.FamilyName, "Smith"),
                             new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+
                             new Claim("position", "prop"),
                             new Claim("club", "Edinburgh"),
-                            new Claim("country", "England")
+                            new Claim("country", "England"),
+
+                            new Claim("height", "6ft2"),
+                            new Claim("weight", "17st")
+
                         }).Result;
             if (!result.Succeeded)
             {
@@ -191,9 +200,13 @@ namespace IdentityServerAspNetIdentity
                             new Claim(JwtClaimTypes.GivenName, "carson"),
                             new Claim(JwtClaimTypes.FamilyName, "Wells"),
                             new Claim(JwtClaimTypes.WebSite, "http://carson.com"),
+
                             new Claim("position", "Flanker"),
                             new Claim("club", "Leinster"),
-                            new Claim("country", "Ireland")
+                            new Claim("country", "Ireland"),
+
+                            new Claim("height", "5ft13"),
+                            new Claim("weight", "16st")
                         }).Result;
             if (!result.Succeeded)
             {

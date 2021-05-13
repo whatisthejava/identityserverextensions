@@ -73,20 +73,37 @@ namespace MvcClient.Controllers
             var authInfo = await HttpContext.AuthenticateAsync("Cookies");
             authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
             authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
+            await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
+            return RedirectToAction("Index");
+        }
+
+        [Obsolete("Not sure if this is supported behaviour - see https://github.com/IdentityServer/IdentityServer4/issues/5256")]
+        [Route("fetch-extra-claims")]
+        public async Task<IActionResult> FetchExtraClaimsViaAuthFlow()
+        {
+            var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
+            var tokenResult = await _refresh.RefreshToken(refreshToken, new List<string>() { "bmi" });
+
+            var authInfo = await HttpContext.AuthenticateAsync("Cookies");
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
+            await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
 
             return RedirectToAction("Index");
         }
 
+        [Obsolete("Not sure if this is supported behaviour - see https://github.com/IdentityServer/IdentityServer4/issues/5256")]
         [Route("fetch-extra-claims")]
-        public async Task<IActionResult> FetchExtraCalims()
+        public async Task<IActionResult> FetchExtraClaims()
         {
-            var oldAccessToken = await HttpContext.GetTokenAsync("access_token");
             var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
-            var newAccessToken = await _refresh.RefreshToken(refreshToken);
+            var tokenResult = await _refresh.RefreshToken(refreshToken, new List<string>() { "bmi" });
 
+            var authInfo = await HttpContext.AuthenticateAsync("Cookies");
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
+            await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
 
-            string json = @"[{ old: '" + oldAccessToken + "',new: '" + newAccessToken.IdentityToken + "'}]";
-            ViewBag.Json = JArray.Parse(json).ToString();
             return RedirectToAction("Index");
         }
 

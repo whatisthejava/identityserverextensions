@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "externals", "externals", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityModel", "..\externals\IdentityModel\src\IdentityModel.csproj", "{92F6FA31-F583-41C2-AA62-B4F125F5B822}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4", "..\externals\IdentityServer4\src\IdentityServer4\src\IdentityServer4.csproj", "{12C5C346-4370-4FBE-8095-FB12BCD084DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,18 @@ Global
 		{92F6FA31-F583-41C2-AA62-B4F125F5B822}.Release|x64.Build.0 = Release|Any CPU
 		{92F6FA31-F583-41C2-AA62-B4F125F5B822}.Release|x86.ActiveCfg = Release|Any CPU
 		{92F6FA31-F583-41C2-AA62-B4F125F5B822}.Release|x86.Build.0 = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|x64.Build.0 = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Debug|x86.Build.0 = Debug|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|x64.Build.0 = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +156,7 @@ Global
 		{09C29B0D-C405-4C9C-A646-803DDF0751D2} = {13AD8615-8CF1-4797-8CC5-5608268DCB97}
 		{B6E2B61E-CD93-4361-AB42-98FFB87773DE} = {13AD8615-8CF1-4797-8CC5-5608268DCB97}
 		{92F6FA31-F583-41C2-AA62-B4F125F5B822} = {5BC2DE33-6ED8-440F-8BC1-B57B5F3511A6}
+		{12C5C346-4370-4FBE-8095-FB12BCD084DE} = {5BC2DE33-6ED8-440F-8BC1-B57B5F3511A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC2EB0C9-9708-48E9-8370-B15C4856E147}
