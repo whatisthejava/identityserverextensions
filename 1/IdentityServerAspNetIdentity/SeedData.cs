@@ -26,7 +26,10 @@ namespace IdentityServerAspNetIdentity
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlite(connectionString));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => {
+                options.Password.RequireNonAlphanumeric = false;
+            })
+
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -117,7 +120,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "AliceSmith@email.com",
                 EmailConfirmed = true,
             };
-            var result = userMgr.CreateAsync(alice, "Sitekit123$").Result;
+            var result = userMgr.CreateAsync(alice, "Sitekit123").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
@@ -147,7 +150,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "BobSmith@email.com",
                 EmailConfirmed = true
             };
-            var result = userMgr.CreateAsync(bob, "Sitekit123$").Result;
+            var result = userMgr.CreateAsync(bob, "Sitekit123").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
@@ -177,7 +180,7 @@ namespace IdentityServerAspNetIdentity
                 Email = "Carson@email.com",
                 EmailConfirmed = true
             };
-            var result = userMgr.CreateAsync(carson, "Sitekit123$").Result;
+            var result = userMgr.CreateAsync(carson, "Sitekit123").Result;
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Description);
