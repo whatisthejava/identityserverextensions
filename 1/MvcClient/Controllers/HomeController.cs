@@ -67,13 +67,13 @@ namespace MvcClient.Controllers
         [Route("refresh")]
         public async Task<IActionResult> RefreshToken()
         {
-            var oldAccessToken = await HttpContext.GetTokenAsync("access_token");
             var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
-            var newAccessToken = await _refresh.RefreshToken(refreshToken);
+            var tokenResult = await _refresh.RefreshToken(refreshToken);
 
+            var authInfo = await HttpContext.AuthenticateAsync("Cookies");
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
+            authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
 
-            string json = @"[{ old: '" + oldAccessToken +"',new: '"+ newAccessToken.IdentityToken +"'}]";
-            ViewBag.Json = JArray.Parse(json).ToString();
             return RedirectToAction("Index");
         }
 
