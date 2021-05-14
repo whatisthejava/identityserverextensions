@@ -64,6 +64,8 @@ namespace MvcClient.Controllers
             return View("json");
         }
 
+
+
         [Route("refresh")]
         public async Task<IActionResult> RefreshToken()
         {
