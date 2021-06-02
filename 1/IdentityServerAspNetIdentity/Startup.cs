@@ -75,12 +75,6 @@ namespace IdentityServerAspNetIdentity
                options.ClientId = "interactive.confidential";
                options.ClientSecret = "secret";
                options.ResponseType = "code";
-
-               options.TokenValidationParameters = new TokenValidationParameters
-               {
-                   NameClaimType = "name",
-                   RoleClaimType = "role"
-               };
            });
         }
 
