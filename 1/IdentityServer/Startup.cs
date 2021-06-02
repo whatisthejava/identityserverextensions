@@ -29,8 +29,8 @@ namespace IdentityServer
             .AddGoogle("Google", options =>
             {
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                options.ClientId = "674890858363-c6kc2hi07okbhddu6c4fro5geipcl5nj.apps.googleusercontent.com";
-                options.ClientSecret = "Ds00fkQV2klTC9DH8dC6AX6u";
+                options.ClientId = "REVOKED";
+                options.ClientSecret = "REVOKED";
             })
             .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
             {

@@ -20,8 +20,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\externals\IdentityServer4\src\IdentityServer4\src\IdentityServer4.csproj" />
-  </ItemGroup>
 </Project>

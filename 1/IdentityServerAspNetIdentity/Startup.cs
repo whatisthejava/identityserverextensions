@@ -57,17 +57,31 @@ namespace IdentityServerAspNetIdentity
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
 
+
             services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    
-                    // register your IdentityServer with Google at https://console.developers.google.com
-                    // enable the Google+ API
-                    // set the redirect URI to https://localhost:5001/signin-google
-                    options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
-                });
+           .AddGoogle("Google", options =>
+           {
+               options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+               options.ClientId = "XXX";
+               options.ClientSecret = "YYY";
+           })
+           .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
+           {
+               options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+               options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+               options.SaveTokens = true;
+
+               options.Authority = "https://demo.identityserver.io/";
+               options.ClientId = "interactive.confidential";
+               options.ClientSecret = "secret";
+               options.ResponseType = "code";
+
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   NameClaimType = "name",
+                   RoleClaimType = "role"
+               };
+           });
         }
 
         public void Configure(IApplicationBuilder app)

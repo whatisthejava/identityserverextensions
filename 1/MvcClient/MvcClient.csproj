@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\externals\IdentityModel\src\IdentityModel.csproj" />
+    <ProjectReference Include="..\..\..\IdentityModel\src\IdentityModel.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,14 +2,109 @@
 
 <h2>Claims</h2>
 
+<div class="claims"></div>
+<p>Below, are the claims that have been returned for the  user.</p>
+
 <dl>
     @foreach (var claim in User.Claims)
     {
-        <dt>@claim.Type</dt>
+        @if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")
+        {
+            <dt>Name Identitifer</dt>
+        }
+        else if (claim.Type == "http://schemas.microsoft.com/identity/claims/identityprovider")
+        {
+            <dt>Identity Provider</dt>
+        }
+        else if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/webpage")
+        {
+            <dt>Web Page</dt>
+        }
+        else if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname")
+        {
+            <dt>Surname</dt>
+        }
+        else if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")
+        {
+            <dt>Given Name</dt>
+        }
+        else if (claim.Type == "http://schemas.microsoft.com/claims/authnmethodsreferences")
+        {
+            <dt>Auth Method</dt>
+        }
+        else if (claim.Type == "preferred_username" ||
+                claim.Type == "name" ||
+                claim.Type.ToLower().Contains("given") || 
+                claim.Type.ToLower().Contains("surname") ||
+                claim.Type.ToLower().Contains("web page")
+                )
+        {
+            <dt>Standard Id Claims: @claim.Type</dt>
+        }
+        else if (claim.Type == "position" ||
+                claim.Type == "club" ||
+                claim.Type == "country"
+                )
+        {
+            <dt>Extended Id Claims (Rugby): @claim.Type</dt>
+        }
+        else
+        {
+            <dt>@claim.Type</dt>
+        }
+
+
+        @if (claim.Type == "s_hash")
+        {
+            <div class="toggleC">Click for description</div>
+            <div class="toggle text-secondary">
+                State hash value.Its value is the base64url encoding of the left-most half of the hash of the octets of the ASCII representation of the state value, where the hash algorithm used is the hash algorithm used in the alg Header Parameter of the ID Token’s JOSE Header.For instance, if the alg is HS512, hash the code value with SHA-512, then take the left-mots 256 bits and base64url encode them.The s_hash value is a case sensitive string.
+            </div>
+
+        }
+        @if (claim.Type == "sid")
+        {
+            <div class="toggleC">Click for description</div>
+            <div class="toggle text-secondary">
+                Session ID - String identifier for a Session. This represents a Session of a User Agent or device for a logged-in End-User at an RP. Different sid values are used to identify distinct sessions at an OP. The sid value need only be unique in the context of a particular issuer. Its contents are opaque to the RP. Its syntax is the same as an OAuth 2.0 Client Identifier.
+            </div>
+        }
+        @if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")
+        {
+            <div class="toggleC">Click for description</div>
+            <div class="toggle text-secondary">
+                The element specifies a subject by a combination of a name qualifier, a name, and a format. The element has the following attributes
+            </div>
+        }
+        @if (claim.Type == "auth_time")
+        {
+            <div class="toggleC">Click for description</div>
+            <div class="toggle text-secondary">
+                The time of the token generation
+            </div>
+        }
+        @if (claim.Type == "http://schemas.microsoft.com/identity/claims/identityprovider")
+        {
+            <div class="toggleC">Click for description</div>
+            <div class="toggle text-secondary">
+                Identifies the source of the identity, internal, or external (may be others)
+            </div>
+        }
+        @if (claim.Type == "http://schemas.microsoft.com/claims/authnmethodsreferences")
+        {
+            {
+                <div class="toggleC">Click for description</div>
+                <div class="toggle text-secondary">
+                    Method of identification (Password, 2FA, MFA, phone)
+                </div>
+            }
+        }
+
         <dd>@claim.Value</dd>
     }
 </dl>
 
+<p></p>
 <h2>Properties</h2>
 
 <dl>
@@ -19,3 +114,25 @@
         <dd>@prop.Value</dd>
     }
 </dl>
+
+<script>
+    $(document).ready(function () {
+
+        $(".toggle").hide();
+
+        $(".toggleC").click(function () {
+            console.log("called");
+
+            var next = $(this).next();
+            var hidden = next.is(":hidden");
+            if (hidden) {
+                next.show();
+            }
+            else {
+                next.hide();
+            }
+            console.log("done");
+        });
+    });
+</script>
+

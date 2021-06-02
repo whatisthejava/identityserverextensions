@@ -13,21 +13,21 @@ namespace MvcClient.Managers
 {
     public class RefreshTokenManager : IRefreshTokenManager
     {
-        public async Task<TokenResponse> RefreshToken(string refreshToken, List<string> extraScopes = null)
+        public async Task<TokenResponse> RefreshToken(string refreshToken, List<string> scopes = null)
         {
             var client = new HttpClient();
             var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
-            var response = await client.RequestRefreshTokenAsync(BuildRequest(disco, refreshToken, extraScopes));
+            var response = await client.RequestRefreshTokenAsync(BuildRequest(disco, refreshToken, scopes));
             return response;
         }
 
-        private RefreshTokenRequest BuildRequest(DiscoveryDocumentResponse disco, string refreshToken, List<string> extraScopes)
+        private RefreshTokenRequest BuildRequest(DiscoveryDocumentResponse disco, string refreshToken, List<string> scopes)
         {
-            extraScopes.Add("openid");
-            extraScopes.Add("profile");
-            extraScopes.Add("offline_access");
-            if (extraScopes != null && extraScopes.Count() > 0)
+            if (scopes != null && scopes.Count() > 0)
             {
+                scopes.Add("openid");
+                scopes.Add("profile");
+                scopes.Add("offline_access");
 
                 return new RefreshTokenRequest
                 {
@@ -36,7 +36,7 @@ namespace MvcClient.Managers
                     ClientId = "mvc",
                     ClientSecret = "secret",
                     RefreshToken = refreshToken,
-                    Scope = string.Join<string>(" ", extraScopes)
+                    Scope = string.Join<string>(" ", scopes)
                 };
             }
             return new RefreshTokenRequest
