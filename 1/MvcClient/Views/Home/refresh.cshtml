@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Authentication
+
+<h2>Claims</h2>
+
+<div class="claims"></div>
+<p>Refresh Token.</p>
+
+<p></p>
+<h2>Properties</h2>
+
+<dl>
+    @foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
+    {
+        @if (prop.Key.EndsWith("id_token") || prop.Key.EndsWith("access_token") || prop.Key.EndsWith("refresh_token") || prop.Key.EndsWith("expires"))
+        {
+            <dt>@prop.Key</dt>
+            <dd>@prop.Value</dd>
+        }
+
+    }
+</dl>
+
+<script>
+    $(document).ready(function () {
+
+        $(".toggle").hide();
+
+        $(".toggleC").click(function () {
+            console.log("called");
+
+            var next = $(this).next();
+            var hidden = next.is(":hidden");
+            if (hidden) {
+                next.show();
+            }
+            else {
+                next.hide();
+            }
+            console.log("done");
+        });
+    });
+</script>
+

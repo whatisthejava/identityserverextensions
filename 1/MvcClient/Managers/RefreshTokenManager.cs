@@ -17,7 +17,8 @@ namespace MvcClient.Managers
         {
             var client = new HttpClient();
             var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
-            var response = await client.RequestRefreshTokenAsync(BuildRequest(disco, refreshToken, scopes));
+            var request = BuildRequest(disco, refreshToken, scopes);
+            var response = await client.RequestRefreshTokenAsync(request);
             return response;
         }
 

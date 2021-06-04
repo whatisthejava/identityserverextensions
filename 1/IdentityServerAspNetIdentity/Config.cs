@@ -29,6 +29,15 @@ namespace IdentityServerAspNetIdentity
                 new ApiScope("employment", "Employment scope for API2")
             };
 
+        public static ICollection<string> PasswordAndCode()
+        {
+            var l = new List<string>();
+            l.AddRange(GrantTypes.Code);
+            l.AddRange(GrantTypes.ResourceOwnerPassword);
+            return l;
+        }
+            
+
         public static IEnumerable<Client> Clients =>
             new List<Client>
             {
@@ -50,7 +59,7 @@ namespace IdentityServerAspNetIdentity
                 new Client
                 {
                     ClientId = "mvc",
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = PasswordAndCode(),
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
@@ -94,7 +103,7 @@ namespace IdentityServerAspNetIdentity
                 {
                     ClientId = "js",
                     ClientName = "JavaScript Client",
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = PasswordAndCode(),
                     RequireClientSecret = false,
 
                     RedirectUris =           { "https://localhost:5003/callback.html" },

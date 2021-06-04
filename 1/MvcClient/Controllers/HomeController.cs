@@ -76,7 +76,7 @@ namespace MvcClient.Controllers
             authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.AccessToken, tokenResult.AccessToken);
             authInfo.Properties.UpdateTokenValue(OpenIdConnectParameterNames.RefreshToken, tokenResult.RefreshToken);
             await HttpContext.SignInAsync("Cookies", authInfo.Principal, authInfo.Properties);
-            return RedirectToAction("Index");
+            return View("refresh");
         }
 
 
