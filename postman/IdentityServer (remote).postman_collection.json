@@ -1,0 +1,520 @@
+{
+	"info": {
+		"_postman_id": "c851b07b-c43c-44b3-9026-0f3bc088203c",
+		"name": "IdentityServer (remote)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client2",
+			"item": [
+				{
+					"name": "Client-Credentials (for client2)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "client2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "employment",
+									"description": "This is the only scope that is allowed.  It doesnt get openid, profile, offline_access because there is no user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Response ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyOTgxN0VEMDc4QzNGRjFGNzI2MzY4QUVCRkFBNTQwIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2MjI4MDYxNDgsImV4cCI6MTYyMjgwOTc0OCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eXNlcnZlci1zcC5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHlzZXJ2ZXItc3AuYXp1cmV3ZWJzaXRlcy5uZXQvcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiY2xpZW50MiIsImp0aSI6IjQ0NzE0OEY0QzY3RERFNjMwOEZFNDRCREJDNjJEMUQzIiwiaWF0IjoxNjIyODA2MTQ4LCJzY29wZSI6WyJlbXBsb3ltZW50Il19.bYfKdkKWmxlloeqfOBNGfTcltyf16qHmrCl0rOqc4ZuRiIVFSkbAoPIF4XICuq2g2U4lY6yxjV0RAkE-3L92xvQg5z74lWgOxjxIEPXBbpwmIZnmFEZbCcJ1Z5W4JgU6BUp4AemBPw_1y2twyDF8N2dN8rOyLHF8oifCFulA2KOT9SMog2WI6WrOSaKiOd8ZoXYQ3XT3ydAuCyMRIU34b3mC3M4V3HY3TFyt-OIMULXYH_v9XgeLGn86BnWJaw_9KB8EcQ8Uf6ohtaUoUBNIDBjDN2VZ20APAs6b8kV3foJKEz5gOE7FIWOV70l_oKeWMIOkLFwPBa_zM5l_n-92Sg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6001/identity",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6001",
+							"path": [
+								"identity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client1",
+			"item": [
+				{
+					"name": "Client-Credentials (for client2)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "client",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "api1",
+									"description": "This is the only scope that is allowed.  It doesnt get openid, profile, offline_access because there is no user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ok Response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyOTgxN0VEMDc4QzNGRjFGNzI2MzY4QUVCRkFBNTQwIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2MjI4MDYyNzQsImV4cCI6MTYyMjgwOTg3NCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eXNlcnZlci1zcC5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHlzZXJ2ZXItc3AuYXp1cmV3ZWJzaXRlcy5uZXQvcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiY2xpZW50IiwianRpIjoiOTk5QzE5RDRDOTNGM0FFRTg4QjIwMjIyMzRDQUU0RTciLCJpYXQiOjE2MjI4MDYyNzQsInNjb3BlIjpbImFwaTEiXX0.Cd2ixSFVhkwn0fWmcHxa5flR7wsAe6-sX8i8JifuS3aPLzEWpuU_mJAlFglW71R1m6VXHFhVOUGmyvRX9s9-4fN78TBaGyD2QHZSAzvp3iU3x7m1P1MssrfoloswwN9v0T2uUbT7QhHcgVJjhoTXsRo_7rZjVl2jBJ5-28aIjFK_RfLewTFylrAP22WHfR8BgfWbHdtFD7BMzosM5w9qT58a2XL3KkPWpcs6_VujMOcReiz_OWgM_xyVgk-lE_yA1D_2SZ1UC69UUbEQpTXYVguxyJKC-rknGdP3RNvMGpVgBX-HdP15jXZNPV57yjki2FQA4CvJKxes10Z1sA_sxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6001/identity",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6001",
+							"path": [
+								"identity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mvc (User)",
+			"item": [
+				{
+					"name": "Password (for mvc)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "mvc",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile offline_access api1",
+									"description": "Remove offline_access",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "alice",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Sitekit123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password (for mvc) (without api1) Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "mvc",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile offline_access",
+									"description": "Remove offline_access",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "alice",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Sitekit123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Response ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyOTgxN0VEMDc4QzNGRjFGNzI2MzY4QUVCRkFBNTQwIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2MjI4MDYzMTksImV4cCI6MTYyMjgwOTkxOSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eXNlcnZlci1zcC5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHlzZXJ2ZXItc3AuYXp1cmV3ZWJzaXRlcy5uZXQvcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoibXZjIiwic3ViIjoiY2Y1Y2U4NDgtMTYxNi00YjJjLTg1YjMtOWU5Zjk3OWE0ZGE5IiwiYXV0aF90aW1lIjoxNjIyODA2MzE5LCJpZHAiOiJsb2NhbCIsImp0aSI6IjY4QTVENEZEOEFFNENBNjMxQUNEQTEwMjYyMjZDNzQwIiwiaWF0IjoxNjIyODA2MzE5LCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.IgnTeAZbVvaszVKtMqERzRmIsL-2MCa0Ym7Vaw-DWCO5pIAodubGDxG18azJSnQ898crfetcv74ENfEj-Gn7BwC9B5kYPMvFilysd-RPKaNCtUd0InhfK1n6RCTAN5QkpHvFKyucoZoP8q4WjMriacJ6XjswJk1BLP6hcz3J1hVpkllFbxtwD8-qMRtEqr9GThDuZHGXbzLBsc5wbjaSfc5MduCbUFqyL-c73ZDdKzHnE2duqxnCq9NDvO1-Tg0zd4qWXoKjWLEN1liOAr5uq9CtSPN_q3mqy7RUwAPKM6UhX2WetbNiL-EQqHGYsFduIKFKx70lV7Pf41zL5UrbMg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6001/identity",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6001",
+							"path": [
+								"identity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ok Response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyOTgxN0VEMDc4QzNGRjFGNzI2MzY4QUVCRkFBNTQwIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2MjI4MDYyODksImV4cCI6MTYyMjgwOTg4OSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eXNlcnZlci1zcC5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHlzZXJ2ZXItc3AuYXp1cmV3ZWJzaXRlcy5uZXQvcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoibXZjIiwic3ViIjoiY2Y1Y2U4NDgtMTYxNi00YjJjLTg1YjMtOWU5Zjk3OWE0ZGE5IiwiYXV0aF90aW1lIjoxNjIyODA2Mjg5LCJpZHAiOiJsb2NhbCIsImp0aSI6IkI3MDg3RUYyQjE1RTVCNUJDMDZEQTU5RThCMDNEQzg0IiwiaWF0IjoxNjIyODA2Mjg5LCJzY29wZSI6WyJhcGkxIiwib3BlbmlkIiwicHJvZmlsZSIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.d-gdOX5x_s3qVJs_c_CNUDRYdFh0uF_6z5dS7QGbYO6B9ePfVAsDRmqw6IYi1T690xqUVbITUQxh9HdBj17UovCyzk74mVFwmiZ5eQDN2o66RI4-RK7qr1r87UemIHMFBlJk-IFU4L5Vv_Chqf7MP6v-6WxyZ6svP4o6-ivQoI-Gzm47rOGaO-8sGhRdz2qRcGXL-Wx3v5-aFhI_7iqmgU7Ps4wAva9NuIpTJDNv8lBFKK0g8Izl7nAil_1S8eOIe3qciOY_h0WDlcKRjtU-UWzehW7FGlMcChskRyjG7sgGjCspGI0jR9wJq9mtySsfJ8881A88rS6MnLi71t_5zQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6001/identity",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6001",
+							"path": [
+								"identity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Javascript Client",
+			"item": [
+				{
+					"name": "Password (for js) Without client_secret",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "mvc",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile offline_access api1",
+									"description": "Remove offline_access",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "alice",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Sitekit123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Refresh_token",
+			"item": [
+				{
+					"name": "Refresh_token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "mvc",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "1D55D297F9A93C88E07773C4103378C4F3F187AA3505B306FF6BCE2A79281A4D",
+									"description": "Refresh_tokens are single use on this app",
+									"type": "text"
+								},
+								{
+									"key": "scopes",
+									"value": "a",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extension_grant",
+			"item": [
+				{
+					"name": "Extension_Grant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "delegation",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "api1.client",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyOTgxN0VEMDc4QzNGRjFGNzI2MzY4QUVCRkFBNTQwIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2MjI4MDYyODksImV4cCI6MTYyMjgwOTg4OSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eXNlcnZlci1zcC5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHlzZXJ2ZXItc3AuYXp1cmV3ZWJzaXRlcy5uZXQvcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoibXZjIiwic3ViIjoiY2Y1Y2U4NDgtMTYxNi00YjJjLTg1YjMtOWU5Zjk3OWE0ZGE5IiwiYXV0aF90aW1lIjoxNjIyODA2Mjg5LCJpZHAiOiJsb2NhbCIsImp0aSI6IkI3MDg3RUYyQjE1RTVCNUJDMDZEQTU5RThCMDNEQzg0IiwiaWF0IjoxNjIyODA2Mjg5LCJzY29wZSI6WyJhcGkxIiwib3BlbmlkIiwicHJvZmlsZSIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.d-gdOX5x_s3qVJs_c_CNUDRYdFh0uF_6z5dS7QGbYO6B9ePfVAsDRmqw6IYi1T690xqUVbITUQxh9HdBj17UovCyzk74mVFwmiZ5eQDN2o66RI4-RK7qr1r87UemIHMFBlJk-IFU4L5Vv_Chqf7MP6v-6WxyZ6svP4o6-ivQoI-Gzm47rOGaO-8sGhRdz2qRcGXL-Wx3v5-aFhI_7iqmgU7Ps4wAva9NuIpTJDNv8lBFKK0g8Izl7nAil_1S8eOIe3qciOY_h0WDlcKRjtU-UWzehW7FGlMcChskRyjG7sgGjCspGI0jR9wJq9mtySsfJ8881A88rS6MnLi71t_5zQ",
+									"description": "access token from mvc app",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://identityserver-sp.azurewebsites.net/connect/token",
+							"protocol": "https",
+							"host": [
+								"identityserver-sp",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
