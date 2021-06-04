@@ -16,7 +16,7 @@ namespace MvcClient.Managers
         public async Task<TokenResponse> RefreshToken(string refreshToken, List<string> scopes = null)
         {
             var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+            var disco = await client.GetDiscoveryDocumentAsync("https://identityserver-sp.azurewebsites.net/");
             var request = BuildRequest(disco, refreshToken, scopes);
             var response = await client.RequestRefreshTokenAsync(request);
             return response;

@@ -17,7 +17,7 @@ namespace API2
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    options.Authority = "https://identityserver-sp.azurewebsites.net";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {

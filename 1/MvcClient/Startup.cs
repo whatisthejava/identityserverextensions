@@ -57,7 +57,7 @@ namespace MvcClient
                 options.Scope.Add("offline_access");
                 options.GetClaimsFromUserInfoEndpoint = true;
 
-                options.Authority = "https://localhost:5001";
+                options.Authority = "https://identityserver-sp.azurewebsites.net";
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
@@ -76,7 +76,8 @@ namespace MvcClient
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+
+                app.UseDeveloperExceptionPage();
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

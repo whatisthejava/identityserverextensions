@@ -80,12 +80,8 @@ namespace IdentityServerAspNetIdentity
 
         public void Configure(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
             app.UseStaticFiles();
 
             app.UseRouting();

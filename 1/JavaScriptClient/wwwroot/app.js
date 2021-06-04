@@ -23,7 +23,7 @@ document.getElementById("logout").addEventListener("click", logout, false);
 
 
 var config = {
-    authority: "https://localhost:5001",
+    authority: "https://identityserver-sp.azurewebsites.net",
     client_id: "js",
     redirect_uri: "https://localhost:5003/callback.html",
     response_type: "code",

@@ -17,7 +17,7 @@ namespace MvcClient.Managers
             var accessToken = await context.GetTokenAsync("access_token");
 
             var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+            var disco = await client.GetDiscoveryDocumentAsync("https://identityserver-sp.azurewebsites.net/");
 
             var response = await client.RequestTokenAsync(new TokenRequest
             {
