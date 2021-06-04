@@ -62,8 +62,8 @@ namespace IdentityServerAspNetIdentity
            .AddGoogle("Google", options =>
            {
                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-               options.ClientId = "674890858363-u0p7quog4gr42lksqv27v1fgsd31pumd.apps.googleusercontent.com";
-               options.ClientSecret = "-G_Zdh1XyQt8eE5EajH7Hp2l";
+               options.ClientId = "";
+               options.ClientSecret = "";
            })
            .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
            {
